@@ -2,6 +2,8 @@
 
 A simple and responsive weather application built using HTML, CSS, and Django, utilizing the OpenWeather API to provide real-time weather data.
 
+![Weather App](demo/screenshot/screenshot.png)
+
 ## Features
 
 - Search for weather by city name.
