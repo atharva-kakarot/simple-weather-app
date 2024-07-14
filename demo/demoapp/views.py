@@ -1,33 +1,35 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render
 import requests
 import datetime
 import math
 import creds
 
-# Create your views here.
-
 def index(request):
     if request.method == "POST":
+        city = request.POST.get("location")
+        api_url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={creds.API_KEY}"
+        response = requests.get(api_url)
+        weather_data = response.json()
         city = request.POST["location"]
-        timezone = datetime.datetime.fromtimestamp(get_weather(city)['timezone'])
-        sunrise = datetime.datetime.fromtimestamp(get_weather(city)['sys']['sunrise'])
-        sunrset = datetime.datetime.fromtimestamp(get_weather(city)['sys']['sunset'])
-        temp = math.floor(get_weather(city)['main']['temp']) - 273
-        feelslike = math.floor(get_weather(city)['main']['feels_like']) - 273
-        tempmax = math.floor(get_weather(city)['main']['temp_max']) - 273
-        tempmin = math.floor(get_weather(city)['main']['temp_min']) - 273
-    
-        context = {'weather_data': get_weather(city),
-                   'weather': get_weather(city)['weather'][0]['main'],
-                   'humidity': get_weather(city)['main']['humidity'],
-                   'visibility': get_weather(city)['visibility'],
-                   'pressure': get_weather(city)['main']['pressure'],
-                   'windspeed': get_weather(city)['wind']['speed'],
-                   'winddeg': get_weather(city)['wind']['deg'],
-                   'cityname': get_weather(city)['name'],
-                   'country': get_weather(city)['sys']['country'],
-                   'latitude': get_weather(city)['coord']['lat'],
-                   'longitude': get_weather(city)['coord']['lon'],
+        timezone = datetime.datetime.fromtimestamp(weather_data['timezone'])
+        sunrise = datetime.datetime.fromtimestamp(weather_data['sys']['sunrise'])
+        sunrset = datetime.datetime.fromtimestamp(weather_data['sys']['sunset'])
+        temp = math.floor(weather_data['main']['temp']) - 273
+        feelslike = math.floor(weather_data['main']['feels_like']) - 273
+        tempmax = math.floor(weather_data['main']['temp_max']) - 273
+        tempmin = math.floor(weather_data['main']['temp_min']) - 273
+        
+        context = {'weather_data': weather_data,
+                   'weather': weather_data['weather'][0]['main'],
+                   'humidity': weather_data['main']['humidity'],
+                   'visibility': weather_data['visibility'],
+                   'pressure': weather_data['main']['pressure'],
+                   'windspeed': weather_data['wind']['speed'],
+                   'winddeg': weather_data['wind']['deg'],
+                   'cityname': weather_data['name'],
+                   'country': weather_data['sys']['country'],
+                   'latitude': weather_data['coord']['lat'],
+                   'longitude': weather_data['coord']['lon'],
                    'timezone': timezone,
                    'sunrise': sunrise,
                    'sunset': sunrset,
@@ -35,8 +37,8 @@ def index(request):
                    'tempmin': tempmin,
                    'temp': temp,
                    'feelslike': feelslike,
-                   'icon': get_weather(city)['weather'][0]['icon']
-                }
+                   'icon': weather_data['weather'][0]['icon']
+        }
         return render(request, 'index.html', context)
     else:
         context = {'weather_data': '--',
@@ -60,11 +62,3 @@ def index(request):
                    'icon': '02d'
                 }
         return render(request, 'index.html', context)
-        
-    
-
-def get_weather(city):
-    api_url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={creds.API_KEY}"
-    response = requests.get(api_url)
-    data = response.json()
-    return data

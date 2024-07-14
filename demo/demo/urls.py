@@ -20,5 +20,4 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('demoapp.urls')),
-    path('get-weather/<str:city>/', include('demoapp.urls')),
 ]
