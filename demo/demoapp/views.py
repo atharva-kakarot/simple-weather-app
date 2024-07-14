@@ -11,7 +11,10 @@ def index(request):
         response = requests.get(api_url)
         weather_data = response.json()
         city = request.POST["location"]
-        timezone = datetime.datetime.fromtimestamp(weather_data['timezone'])
+        tz_offset_seconds = int(weather_data['timezone'])
+        utc_timestamp = datetime.datetime.utcnow().timestamp()
+        local_timestamp = utc_timestamp + tz_offset_seconds
+        timezone = datetime.datetime.fromtimestamp(local_timestamp)
         sunrise = datetime.datetime.fromtimestamp(weather_data['sys']['sunrise'])
         sunrset = datetime.datetime.fromtimestamp(weather_data['sys']['sunset'])
         temp = math.floor(weather_data['main']['temp']) - 273
