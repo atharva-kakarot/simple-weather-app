@@ -17,7 +17,6 @@ A simple and responsive weather application built using HTML, CSS, and Django, u
 - **CSS**: Styling and layout.
 - **Django**: Web framework for backend development.
 - **OpenWeather API**: For fetching real-time weather data.
-- **JavaScript**: Optional for enhancing interactivity.
 
 ## Setup
 
