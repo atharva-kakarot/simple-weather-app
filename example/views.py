@@ -2,12 +2,15 @@ from django.shortcuts import render
 import requests
 import datetime
 import math
-import creds
+import os
+from dotenv import load_dotenv
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
 
 def index(request):
     if request.method == "POST":
         city = request.POST.get("location")
-        api_url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={creds.API_KEY}"
+        api_url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
         response = requests.get(api_url)
         weather_data = response.json()
         city = request.POST["location"]
