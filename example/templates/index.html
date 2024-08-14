@@ -102,4 +102,20 @@
         </div>
     </center>
 </body>
+<script>
+    const temp = {{temp}};
+
+    if (temp > 0 && temp <= 20) {
+        document.body.style.backgroundColor = "darkblue";
+    }
+    else if (temp > 20 && temp <= 30) {
+        document.body.style.backgroundColor = "green";
+    }
+    else if (temp > 30 && temp <= 40) {
+        document.body.style.backgroundColor = "gold";
+    }
+    else if (temp > 40 && temp < 50) {
+        document.body.style.backgroundColor = "orange";
+    }
+</script>
 </html>
