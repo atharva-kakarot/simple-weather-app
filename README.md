@@ -6,7 +6,6 @@ A simple and responsive weather application built using HTML, CSS, and Django, u
 
 - Search for weather by city name.
 - Displays current temperature, humidity, wind speed, and weather conditions.
-- Responsive design for mobile and desktop views.
 - Easy-to-use interface.
 
 ## Technologies Used
