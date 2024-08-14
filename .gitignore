@@ -4,6 +4,7 @@
 __pycache__
 db.sqlite3
 media
+creds.py
 
 # Environments 
 .env 

@@ -1,0 +1,105 @@
+<html>
+
+<head>
+    {% load static %}
+    <title>
+        The Weather App
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/index.css'%}">
+</head>
+
+<body>
+    <center>
+        <div id="main-container">
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" id="input-box" placeholder="Enter your city name" name="location">
+                <button id="search-button" type="submit">Search</button>
+            </form>
+            <div id="container">
+                <div id="current-weather-div">
+                    <img src='http://openweathermap.org/img/wn/{{icon}}@2x.png' id="weather-img" alt="weather img">
+                    <div id="display-temp">
+                        <span id="current-temp">{{temp}}°C</span><br>
+                        <span id="feels-like">feels like: {{feelslike}}°C</span>
+                    </div>
+                </div>
+                <div id="current-weather-details">
+                    <table id="weather-details-table">
+                        <tr>
+                        <td>Weather:</td>
+                        <td><div class="time-div-container-one"><img src="static/images/cloudy.png" class = "icons">&nbsp;<div class="time-div">{{weather}}</div></div></td>
+                     </tr>
+                     <tr>
+                        <td>Humidty:</td>
+                        <td><div class="time-div-container-one"><img src="static/images/humidity.png" class = "icons">&nbsp;<div class="time-div">{{humidity}}%</div></div></td>
+                     </tr>
+                     <tr>
+                        <td>Visibility:</td>
+                        <td><div class="time-div-container-one"><img src="static/images/visibility.png" class = "icons">&nbsp;<div class="time-div">{{visibility}}m</div></div></td>
+                     </tr>
+                     <tr>
+                        <td>Pressure:</td>
+                        <td><div class="time-div-container-one"><img src="static/images/barometer.png" class = "icons">&nbsp;<div class="time-div">{{pressure}}hPa</div></div></td>
+                     </tr>
+                     <tr>
+                        <td>Temperature (Max):</td>
+                        <td><div class="time-div-container-one"><img src="static/images/thermometer.png" class = "icons">&nbsp;<div class="time-div">{{tempmax}}°C</div></div></td>
+                     </tr>
+                     <tr>
+                        <td>Temperature (Min):</td>
+                        <td><div class="time-div-container-one"><img src="static/images/thermometer.png" class = "icons">&nbsp;<div class="time-div">{{tempmin}}°C</div></div></td>
+                     </tr>
+                     <tr>
+                        <td>Wind Speed:</td>
+                        <td><div class="time-div-container-one"><img src="static/images/wind.png" class = "icons">&nbsp;<div class="time-div">{{windspeed}}m/s</div></div></td>
+                     </tr>
+                     <tr>
+                        <td>Wind Degree:</td>
+                        <td><div class="time-div-container-one"><img src="static/images/navigation.png" class = "icons">&nbsp;<div class="time-div">{{winddeg}}°</div></div></td>
+                     </tr>
+                    </table>
+                </div>
+                <div id="coordinates-div">
+                    <div id="city-name-div">
+                        <span id="city-name">{{cityname}}, {{country}}</span>
+                    </div>
+                    <div id="city-details-div">
+                            <table id="city-details-table">
+                                <tr>
+                                <td>Latitude:</td>
+                                <td><div class="time-div-container"><img src="static/images/latitude.png" class = "icons">&nbsp;<div class="time-div">{{latitude}}°</div></div></td>
+                                </tr>
+                                <tr>
+                                <td>Longitude:</td>
+                                <td><div class="time-div-container"><img src="static/images/longitude.png" class = "icons">&nbsp;<div class="time-div">{{longitude}}°</div></div></td>
+                                </tr>
+                                <tr>
+                                <td>Time Zone:</td>
+                                <td><div class="time-div-container"><img src="static/images/time-zone.png" class = "icons">&nbsp;<div class="time-div">{{timezone}}</div></div></td>
+                                </tr>
+                                <tr>
+                                <td>Sunrise:</td>
+                                <td><div class="time-div-container"><img src="static/images/sunrise.png" class = "icons">&nbsp;<div class="time-div">{{sunrise}}</div></div></td>
+                                </tr>
+                                <tr>
+                                <td>Sunset:</td>
+                                <td><div class="time-div-container"><img src="static/images/sunset.png" class = "icons">&nbsp;<div class="time-div">{{sunset}}</div></div></td>
+                                </tr>
+                                </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+</body>
+</html>
